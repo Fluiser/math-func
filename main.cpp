@@ -16,16 +16,15 @@ T transX(T n, T s)
 {
     auto E = (float)s/2;
     if (n < 0) return (E-abs(n));
-    if (n >= 0) return (n+E);
+    else return (n+E);
 }
 
 template<typename T>
 T transY(T n, T s)
 {
     auto E = (float)s/2;
-    if(n > 0) return (E-n);
-    if(n == 0) return E;
-    if(n < 0) return (E+abs(n));
+    if(n >= 0) return (E-n);
+    else return (E+abs(n));
 }
 
 
