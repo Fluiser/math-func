@@ -1,0 +1,8 @@
+# Trash
+.idea
+.git
+.vs
+cmake-build-release-visual-studio
+out
+CMakeSettings.json
+CMakeFiles
