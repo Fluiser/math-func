@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "main_vector.cpp"
+#include "main_vector.h"
 #include <vector>
 
 #ifndef ___WINDOW_H
