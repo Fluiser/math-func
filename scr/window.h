@@ -13,10 +13,9 @@ public:
 
 	Window(int x, int y, const char* title)
 	{
-	    items.reserve(___reserve_size);
-        window.create(sf::VideoMode(x, y), title);
+            window.create(sf::VideoMode(x, y), title);
 	}
-
+	//Fucking github syntax.
 	void render(void(*windowRender)(sf::RenderWindow&, Window*), void(*eventListener)(sf::Event&, Window*))
 	{
 		sf::Event event;
