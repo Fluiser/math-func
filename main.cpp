@@ -117,7 +117,7 @@ int main(int argc, char** argv)
 
     if(argc >= 2) {
         for(int i = 1; i < argc; ++i)
-            if(std::string(argv[i]) == "debug") debug = true;
+            if(argv[i] == "debug") debug = true;
     }
     std::cout << h << "x" << w << "\n";
     Window window(h, w, "MAIN WINDOW");
