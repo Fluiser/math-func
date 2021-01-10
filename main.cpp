@@ -37,13 +37,8 @@ double mathFunction(double x)
 auto toNumber(const std::string& str)
 {
     size_t num = 0;
-    try {
-        std::stringstream stream(str);
-        stream >> num;
-    } catch(std::exception err) {
-        if(debug) std::cout << err.what() << "\n";
-        num = 0;
-    }
+    std::stringstream stream(str);
+    stream >> num;
     return num;
 }
 
