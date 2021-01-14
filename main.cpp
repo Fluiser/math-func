@@ -5,7 +5,7 @@
 #include <math.h>
 #define MATH_DEFINES
 #define DEFAULT_HEIGHT 1000
-#define DEFAULT_WEIGHT 1000
+#define DEFAULT_WIDTH 1000
 
 static bool debug = false;
 const unsigned cm = 50;
@@ -108,7 +108,7 @@ int main(int argc, char** argv)
     }
 
     if(h < 1) h = DEFAULT_HEIGHT;
-    if(w < 1) w = DEFAULT_WEIGHT;
+    if(w < 1) w = DEFAULT_WIDTH;
 
     if(argc >= 2) {
         for(int i = 1; i < argc; ++i)
