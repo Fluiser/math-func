@@ -21,12 +21,12 @@ std::vector<v> points;
 sf::Clock timer;
 bool debug = false;
 
-inline float v_(const v& a,const v& b)
+float v_(const v& a,const v& b)
 {
     return (a.x*b.y-b.x*a.y);
 }
 
-inline bool wtf(const float& a, const float&b = 0.0)
+bool wtf(const float& a, const float&b = 0.0)
 {
     return ((a*b)<1e-9);
 }
@@ -60,12 +60,12 @@ inline float random(const int& min, const int& max)
     return (random(max-min)+min);
 }
 
-inline int includes(const std::vector<int>& v, const int& value)
+int includes(const std::vector<int>& v, const int& value)
 {
 	for(int i = 0; i < v.size(); ++i)
-    	{
+    {
 	    if(v[i] == value) return i;
-	}
+    }
 	return -1;
 }
 
