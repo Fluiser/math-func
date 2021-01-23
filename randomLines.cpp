@@ -21,12 +21,12 @@ std::vector<v> points;
 sf::Clock timer;
 bool debug = false;
 
-float v_(const v& a,const v& b)
+inline float v_(const v& a,const v& b)
 {
     return (a.x*b.y-b.x*a.y);
 }
 
-bool wtf(const float& a, const float&b = 0.0)
+inline bool wtf(const float& a, const float&b = 0.0)
 {
     return ((a*b)<1e-9);
 }
