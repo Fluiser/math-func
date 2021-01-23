@@ -1,3 +1,5 @@
+// Ты любишь костыли?
+// Почти весь код на них руководствуется. 
 #include "scr/window.h"
 #define _USE_MATH_DEFINES
 #include <string>
