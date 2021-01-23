@@ -69,10 +69,10 @@ int includes(const std::vector<int>& v, const int& value)
 	return -1;
 }
 
-sf::Vector2f r(std::vector<int>& alloved, int& __)
+sf::Vector2f r(std::vector<int>& allowed, int& __)
 {
-    int v = rand()%alloved.size();
-    v = alloved[v];
+    int v = rand()%allowed.size();
+    v = allowed[v];
     __ = v;
     switch(v)
     {
@@ -108,33 +108,33 @@ bool allCross(const v& a, const v& b)
 
 void tick(const sf::Vector2f& p)
 {
-    std::vector<int> alloved = {0,1,2,3};
+    std::vector<int> allowed = {0,1,2,3};
     int code;
-    auto v = r(alloved, code);
+    auto v = r(allowed, code);
     v += p;
     while(allCross(p, v) || (v.x < 0 || v.x > 990 || v.y > 990 || v.y < 0))
     {
         if (debug) {
             std::cout << "CROSSING\n";
-            std::cout << "ALLOW WAYS: " << alloved.size() << "\n";
+            std::cout << "ALLOW WAYS: " << allowed.size() << "\n";
         }
-        if(alloved.size()) {
-            int __$ = includes(alloved, code);
+        if(allowed.size()) {
+            int __$ = includes(allowed, code);
             if (debug) {
                 std::cout << "CODE: " << code << "\n";
                 std::cout << "OFFSET: " << __$ << "\n";
             }
-            if(__$ != -1) alloved.erase(alloved.begin()+__$);
-            if (alloved.size()) {
-                v = r(alloved, code);
+            if(__$ != -1) allowed.erase(allowed.begin()+__$);
+            if (allowed.size()) {
+                v = r(allowed, code);
                 v += p;
             }
             else continue;
         } else {
             if(debug) std::cout << "CANNOT FIND WAY\n";
-            alloved = {0,1,2,3};
+            allowed = {0,1,2,3};
             while((v.x < 0 || v.x > 990 || v.y > 990 || v.y < 0)) {
-                v = r(alloved, code);
+                v = r(allowed, code);
                 v += p;
             }
             break;
