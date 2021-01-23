@@ -60,12 +60,12 @@ inline float random(const int& min, const int& max)
     return (random(max-min)+min);
 }
 
-int includes(const std::vector<int>& v, const int& value)
+inline int includes(const std::vector<int>& v, const int& value)
 {
 	for(int i = 0; i < v.size(); ++i)
-    {
+    	{
 	    if(v[i] == value) return i;
-    }
+	}
 	return -1;
 }
 
