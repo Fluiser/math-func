@@ -26,7 +26,7 @@ float v_(const v& a,const v& b)
 
 bool wtf(const float& a, const float&b = 0.0)
 {
-    return ((a*b)<1e-3);
+    return ((a*b)<1e-9);
 }
 
 bool crossing(const v& aStart, const v& aEnd,
