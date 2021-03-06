@@ -1,8 +1,11 @@
 #include <SFML/Graphics.hpp>
+#include "math_vector.h"
 #include <vector>
 
-#ifndef ___WINDOW_HPP
-#define ___WINDOW_HPP
+#ifndef ___WINDOW_H
+#define ___WINDOW_H
+
+constexpr size_t ___reserve_size = 8*8*8*8;
 
 class Window {
 public:
@@ -10,9 +13,9 @@ public:
 
 	Window(int x, int y, const char* title)
 	{
-            window.create(sf::VideoMode(x, y), title, sf::Style::Default);
+            window.create(sf::VideoMode(x, y), title, sf::Style::Fullscreen);
 	}
-
+	//Fucking github syntax.
 	void render(void(*windowRender)(sf::RenderWindow&, Window*), void(*eventListener)(sf::Event&, Window*))
 	{
 		sf::Event event;
@@ -26,6 +29,12 @@ public:
 			windowRender(window, this);
 		}
 	}
+
+    template<typename T>
+    void line(const sf::Vector2<T>& start, const sf::Vector2<T> end, const unsigned& size, sf::Color color = sf::Color::Red)
+    {
+        this->line<T>(start,end,color);
+    }
 
     template<typename T>
     void line(const sf::Vector2<T>& start, const sf::Vector2<T>& end, sf::Color color = sf::Color::Red)

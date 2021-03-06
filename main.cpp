@@ -1,36 +1,33 @@
 #include "scr/window.h"
+#include <iostream>
 #include <chrono>
 #include <thread>
 #include <sstream>
+#define _USE_MATH_DEFINES
 #include <math.h>
-#define MATH_DEFINES
 #define DEFAULT_HEIGHT 1000
 #define DEFAULT_WIDTH 1000
 
+inline float radiant(const float& n)
+{
+    if(n == 0) return 0;
+    return (n)*M_PI/180;
+}
+
 static bool debug = false;
-const unsigned cm = 50;
+constexpr float cm = 50;
 constexpr const unsigned sleep_for = 1000/30;
 
-template<typename T>
-T transX(T n, T s)
+float h = -1, w = -1;
+
+inline sf::Vector2f normalize(const sf::Vector2f& null, const sf::Vector2f& point)
 {
-    auto E = (float)s/2;
-    if (n < 0) return (E-abs(n));
-    else return (n+E);
+	return sf::Vector2f{ null.x+point.x, null.y-point.y };
 }
 
-template<typename T>
-T transY(T n, T s)
+float mathFunction(float x)
 {
-    auto E = (float)s/2;
-    if(n >= 0) return (E-n);
-    else return (E+abs(n));
-}
-
-
-double mathFunction(double x)
-{
-    double y = sin(x)*180;
+    float y = sin(radiant(x));
     return y;
 }
 
@@ -48,14 +45,14 @@ void renderMathFunction(sf::RenderWindow& window, Window* _)
     auto size = _->window.getSize();
     //@Y
     _->line(
-            math::vector<float>(size.x/2, 0),
-            math::vector<float>(size.x/2, size.y),
+            sf::Vector2f(size.x/2, 0),
+            sf::Vector2f(size.x/2, size.y),
             sf::Color::Yellow
         );
     //@X
     _->line(
-            math::vector<float>(0, size.y/2),
-            math::vector<float>(size.x, size.y/2),
+            sf::Vector2f(0, size.y/2),
+            sf::Vector2f(size.x, size.y/2),
             sf::Color::Yellow
         );
 
@@ -63,8 +60,8 @@ void renderMathFunction(sf::RenderWindow& window, Window* _)
     for(unsigned i = 0; i <= size.y; i += cm)
     {
         _->line(
-                math::vector<float>((size.x/2)-5, i),
-                math::vector<float>((size.x/2)+5, i),
+                sf::Vector2f((size.x/2)-5, i),
+                sf::Vector2f((size.x/2)+5, i),
                 sf::Color::Yellow
         );
     }
@@ -72,24 +69,20 @@ void renderMathFunction(sf::RenderWindow& window, Window* _)
     for(unsigned i = 0; i <= size.x; i += cm)
     {
         _->line(
-                math::vector<float>(i, (size.y/2)-5),
-                math::vector<float>(i, (size.y/2)+5),
+                sf::Vector2f(i, (size.y/2)-5),
+                sf::Vector2f(i, (size.y/2)+5),
                 sf::Color::Yellow
         );
     }
     
-    for(float x = -(float)size.x/2; x <= ((float)size.x/2); x += cm)
+    for(float x = -(float)size.x/2; x <= ((float)size.x/2); x += cm/10)
     {
-        auto start = math::vector<double>(transX<double>(x, size.x), transY<double>(mathFunction(x), size.y));
-        auto end = math::vector<double>(transX<double>(x+cm, size.x), transY<double>(mathFunction(x+cm), size.y));
-        if(debug) {
-            std::cout << x << " - " << mathFunction(x) << "\n";
-            std::cout << "start: " << start.toString() << "\n";
-            std::cout << "end: " << end.toString() << "\n";
-        }
+        sf::Vector2f start{ x, mathFunction(x)*cm };
+        sf::Vector2f end{ x+cm/10, mathFunction(x+cm/10)*cm };
+
         _->line(
-                start,
-                end,
+                normalize(sf::Vector2f{h/2, w/2}, start),
+                normalize(sf::Vector2f{h/2, w/2}, end),
                 sf::Color::Red
         );
     }
@@ -100,7 +93,6 @@ void renderMathFunction(sf::RenderWindow& window, Window* _)
 
 int main(int argc, char** argv)
 {
-    int h = -1, w = -1;
     if (argc >= 3) {
         std::cout << toNumber(argv[1]) << "\n";
         h = toNumber(argv[1]);
