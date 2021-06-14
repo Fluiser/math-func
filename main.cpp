@@ -16,6 +16,7 @@ inline float radiant(const float& n)
 
 static bool debug = false;
 constexpr float cm = 50;
+// It's for you if want you draw line with random y.
 constexpr const unsigned sleep_for = 1000/30;
 
 float h = -1, w = -1;
